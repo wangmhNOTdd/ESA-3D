@@ -225,7 +225,30 @@ class LocalLogger:
                             })
         
         print(f"Loaded {len(self.metrics_history['epochs'])} entries from {log_file}")
-
+    
+    def log_metric(self, key: str, value: Any, step: Optional[int] = None):
+        """
+        记录单个指标
+        
+        Args:
+            key: 指标名称
+            value: 指标值
+            step: 当前步数
+        """
+        metrics = {key: value}
+        
+        # 添加时间戳
+        log_entry = {
+            'timestamp': time.time(),
+            'step': step,
+            'elapsed_time': time.time() - self.start_time,
+            **metrics
+        }
+        
+        # 写入文件
+        with open(self.log_file, 'a') as f:
+            f.write(json.dumps(log_entry) + '\n')
+    
 
 def create_experiment_report(log_dir: str, experiment_name: str, output_file: str = None):
     """创建实验报告"""

@@ -1,7 +1,7 @@
 {
   "exp_name": "esa3d_pdbbind_default",
-  "data_dir": "c:/Users/18778/Desktop/torch-learn/ESA-3D/data/processed",
-  "save_dir": "c:/Users/18778/Desktop/torch-learn/ESA-3D/experiments/default",
+  "data_dir": "./data/processed",
+  "save_dir": "./experiments/default",
   "device": "cuda",
   "random_seed": 42,
   
