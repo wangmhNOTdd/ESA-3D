@@ -1,0 +1,36 @@
+{
+  "exp_name": "esa3d_pdbbind_default",
+  "data_dir": "c:/Users/18778/Desktop/torch-learn/ESA-3D/data/processed",
+  "save_dir": "c:/Users/18778/Desktop/torch-learn/ESA-3D/experiments/default",
+  "device": "cuda",
+  "random_seed": 42,
+  
+  "model": {
+    "node_dim": 43,
+    "edge_dim": 16,
+    "hidden_dim": 128,
+    "num_layers": 6,
+    "num_heads": 8,
+    "num_radial": 64,
+    "cutoff": 10.0,
+    "num_seeds": 32,
+    "output_dim": 1,
+    "dropout": 0.1
+  },
+  
+  "training": {
+    "batch_size": 4,
+    "num_epochs": 200,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.0001,
+    "grad_clip": 1.0,
+    "patience": 30,
+    "num_workers": 4
+  },
+  
+  "data": {
+    "max_atoms": 200,
+    "cutoff": 5.0,
+    "include_hydrogen": false
+  }
+}
