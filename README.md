@@ -2,6 +2,38 @@
 
 ESA-3D是一个基于边集合注意力的3D分子性质预测模型，结合了ESA（Edge-Set Attention）的简洁性和GET（Generalist Equivariant Transformer）的等变性。
 
+## 数据准备
+
+### 方法1：使用PDBBind数据集（推荐）
+
+1. **下载PDBBind数据** ：
+   ```bash
+   # 显示下载说明
+   python setup_data.py download
+   ```
+
+2. **预处理数据** ：
+   ```bash
+   # 自动预处理PDBBind数据
+   python setup_data.py preprocess
+   ```
+
+### 方法2：使用示例数据（快速测试）
+
+```bash
+# 创建示例数据用于测试
+python setup_data.py sample
+
+# 使用示例数据训练
+python train.py --config config/default.json --data_dir data/sample
+```
+
+### 注意事项
+
+- 处理后的数据文件较大，已在`.gitignore`中排除
+- 请在本地生成数据，不要提交到Git仓库
+- 示例数据仅用于测试代码功能
+
 ## 核心思想
 
 ### 1. 边中心表示（Edge-Centric Representation）
