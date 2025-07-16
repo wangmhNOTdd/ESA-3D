@@ -1,0 +1,41 @@
+{
+  "exp_name": "esa3d_mixed_sparse_medium",
+  "data_dir": "./data/processed",
+  "save_dir": "./experiments/mixed_sparse_medium",
+  "device": "cuda",
+  "random_seed": 42,
+  
+  "model": {
+    "node_dim": 43,
+    "edge_dim": 16,
+    "hidden_dim": 128,
+    "num_layers": 6,
+    "num_heads": 8,
+    "num_radial": 64,
+    "cutoff": 5.0,
+    "num_seeds": 32,
+    "output_dim": 1,
+    "dropout": 0.1,
+    "k_neighbors": 32,
+    "block_size": 64
+  },
+  
+  "training": {
+    "batch_size": 4,
+    "num_epochs": 200,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.0001,
+    "grad_clip": 1.0,
+    "patience": 30,
+    "num_workers": 4
+  },
+  
+  "data": {
+    "max_atoms": 1000,
+    "max_residues": 200,
+    "atom_cutoff": 5.0,
+    "residue_cutoff": 10.0,
+    "include_hydrogen": false,
+    "granularity": "mixed"
+  }
+}

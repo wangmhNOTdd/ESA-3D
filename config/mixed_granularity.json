@@ -1,0 +1,50 @@
+{
+  "exp_name": "esa3d_mixed_granularity_optimized",
+  "data_dir": "./data/processed",
+  "save_dir": "./experiments/mixed_granularity",
+  "device": "cuda",
+  "random_seed": 42,
+  
+  "model": {
+    "node_dim": 43,
+    "edge_dim": 16,
+    "hidden_dim": 128,
+    "num_layers": 4,
+    "num_heads": 8,
+    "num_radial": 64,
+    "cutoff": 10.0,
+    "num_seeds": 32,
+    "output_dim": 1,
+    "dropout": 0.1,
+    "chunk_size": 64,
+    "use_sparse": true,
+    "top_k": 32
+  },
+  
+  "data": {
+    "granularity": "mixed",
+    "max_atoms": 500,
+    "max_residues": 100,
+    "atom_cutoff": 5.0,
+    "residue_cutoff": 10.0,
+    "include_hydrogen": false
+  },
+  
+  "training": {
+    "batch_size": 4,
+    "num_epochs": 100,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.0001,
+    "grad_clip": 1.0,
+    "patience": 20,
+    "num_workers": 4
+  },
+  
+  "memory_optimization": {
+    "enable_chunk_processing": true,
+    "chunk_size": 64,
+    "enable_sparse_attention": true,
+    "sparse_top_k": 32,
+    "enable_gradient_checkpointing": false
+  }
+}

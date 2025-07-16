@@ -33,7 +33,7 @@ MAB是ESA的核心，它限制了注意力只在有连接关系的边之间发�
    其中 $W_Q, W_K, W_V \in \mathbb{R}^{d_{in} \times d_{model}}$ 是可学习的权重矩阵。
 
 4. **计算边-边连接Mask ($M_{edge}$)**:
-   这是关键一步。Mask矩阵 $M_{edge} \in \mathbb{R}^{N_e \times N_e}$ 定义了哪些边对可以相互关注。如果边`p`和边`q`在原始图中共享一个节点，则 $M_{edge}\[p, q] = 0$，否则 $M_{edge}\[p, q] = -\infty$。
+   这是关键一步。Mask矩阵 $M_{edge} \in \mathbb{R}^{N_e \times N_e}$ 定义了哪些边对可以相互关注。如果边`p`和边`q`在原始图中共享一个节点，则 $M_{edge}[p, q] = 0$，否则 $M_{edge}[p, q] = -\infty$。
    （具体实现见论文`Algorithm 1`，通过检查源/目标节点是否相同来高效计算）。
 
 5. **Masked Scaled Dot-Product Attention**:
@@ -87,7 +87,7 @@ ESA-3D将ESA的哲学扩展到3D几何空间，核心是引入E(3)等变性。
 
 ##### **一个通用的等变边注意力层 (EEA Layer) 的公式**
 
-假设输入是边的集合 `{h_p, \vec{x}_p}` 和一个Mask矩阵 `M`。
+假设输入是边的集合 ${h_p, \vec{x}_p}$ 和一个Mask矩阵 `M`。
 
 1. **生成不变的Query, Key, Value**:
    $ q_p = W_Q h_p, \quad k_p = W_K h_p, \quad v_p = W_V h_p $
@@ -115,14 +115,14 @@ ESA-3D将ESA的哲学扩展到3D几何空间，核心是引入E(3)等变性。
 ##### **2.1 EEA-Intra (区块内注意力)**
 
 * **实现**: 使用**区块内Mask ($M_{intra}$)** 的EEA层。
-  $ ({h'}, {\vec{x'}}) = \text{EEA}({h}, {\vec{x}}, M_{intra}) $
-  $M_{intra}\[p, q] = 0$ 如果边`p`和`q`在同一区块且共享节点，否则为`-\infty`。
+  $({h'}, {\vec{x'}}) = \text{EEA}({h}, {\vec{x}}, M_{intra})$
+  $M_{intra}[p, q] = 0$ 如果边`p`和`q`在同一区块且共享节点，否则为`-\infty`。
 
 ##### **2.2 EEA-Inter (区块间注意力)**
 
 * **实现**: 使用**区块间Mask ($M_{inter}$)** 的EEA层。
   $ ({h''}, {\vec{x''}}) = \text{EEA}({h'}, {\vec{x'}}, M_{inter}) $
-  $M_{inter}\[p, q] = 0$ 如果边`p`和`q`在不同区块，否则为`-\infty`。
+  $M_{inter}[p, q] = 0$ 如果边`p`和`q`在不同区块，否则为`-\infty`。
 
 #### **3. 池化与预测 (Pooling & Prediction)**
 
@@ -143,6 +143,6 @@ ESA-3D将ESA的哲学扩展到3D几何空间，核心是引入E(3)等变性。
 3. **最终预测**:
 
    * 将全局不变特征拼接起来，送入MLP：
-     $ \text{Affinity} = \text{MLP}(\[H_{graph} \ || \ X_{graph}]) $
+     $ \text{Affinity} = \text{MLP}([H_{graph} \ || \ X_{graph}]) $
 
-通过这套详细的公式，ESA-3D在保留ESA核心思想的同时，严格遵循了E(3)等变性，并实现了对局部和全局信息的无损、迭代式学习，理论上能够达到与GET相媲美的效果。
+
